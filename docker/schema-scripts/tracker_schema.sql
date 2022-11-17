@@ -1,6 +1,6 @@
-create table "user"
+create table "users"
 (
-	id int(11) not null primary key AUTO_INCREMENT,
+	id uuid not null primary key,
 	"email" varchar(128) not null unique,
 	"firstName" varchar(128) not null,
 	"lastName" varchar(128) not null,

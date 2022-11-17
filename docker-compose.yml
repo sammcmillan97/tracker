@@ -7,7 +7,7 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgres://user:pass@postgres:5432/db
+      # DATABASE_URL: postgres://user:pass@postgres:5432/db
       NODE_ENV: development
       PORT: 3000
     ports:
@@ -21,7 +21,11 @@ services:
     image: postgres:11
     ports:
       - "35432:5432"
+    volumes:
+      - ./docker/init-db:/docker-entrypoint-initdb.d/
+      - ./docker/schema-scripts:/mnt/schema-scripts  
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: db
+      POSTGRES_PASSWORD: postgres
+      TRACKER_SCHEMA_FILE: tracker_schema.sql
+
+      
