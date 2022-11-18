@@ -1,13 +1,13 @@
 'use strict';
 
-const express = require('express');
+const exressSetUp = require('./config/express');
 const connect = require('./config/db');
 
 
 const PORT = 3000;
 const HOST = '0.0.0.0';
 
-const app = express();
+const app = exressSetUp();
 
 async function main() {
   try {
