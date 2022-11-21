@@ -23,7 +23,6 @@ services:
       - "35432:5432"
     volumes:
       - ./docker/init-db:/docker-entrypoint-initdb.d/
-      - ./docker/schema-scripts:/mnt/schema-scripts  
     environment:
       POSTGRES_PASSWORD: postgres
       TRACKER_SCHEMA_FILE: tracker_schema.sql
