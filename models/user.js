@@ -15,16 +15,17 @@ module.exports = (sequelize, DataTypes) => {
     }
     
     toJSON() {
-      return { ...this.get(), id: undefined }
+      return { ...this.get(), password: undefined }
     }
 
   }
   User.init({
     id: { type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV1},
-    email: { type: DataTypes.STRING, allowNull: false, unique: true },
-    firstName:  { type: DataTypes.STRING, allowNull: false },
-    lastName: { type: DataTypes.STRING, allowNull: false },
-    password: { type: DataTypes.STRING, allowNull: false } //PASSWORD hash
+    email: { type: DataTypes.STRING, allowNull: false, unique: true, validate: { isEmail: true, len: [5, 254]} },
+    username: { type: DataTypes.STRING, allowNull: false, unique: true, validate: { len: [1, 30]}},
+    firstName:  { type: DataTypes.STRING, allowNull: false, validate: { len: [1, 30]}},
+    lastName: { type: DataTypes.STRING, allowNull: false, validate: { len: [1, 30]}},
+    password: { type: DataTypes.STRING, allowNull: false, validate: {len: [8, 30]}} //PASSWORD hash
   }, {
     sequelize,
     tableName: 'users',

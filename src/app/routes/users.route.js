@@ -5,10 +5,10 @@ const userController = require('../controllers/users.controller');
 
 
 router.route('/')
-    .post(userController.create);
+    .post(userController.registerUser);
 
 router.route('/:id')
-    .get(userController.get);
+    .get(userController.getUser);
 
     
 module.exports = router;    

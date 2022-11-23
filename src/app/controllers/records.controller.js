@@ -1,15 +1,18 @@
-const { Record, User } = require('../../../models')
+const { Record, User, Category } = require('../../../models')
 
 
 const create = async function(req, res){
-    const { userId, description, notes, start, end, enjoyment, productivity } = req.body
+    const { userId, categoryId, description, notes, start, end, enjoyment, productivity } = req.body
     try {
         const user = await User.findOne({
             where: { id: userId }
         })
-        console.log(user)
+        const category = await Category.findOne({
+            where: {id: categoryId}
+        })
+
         if (user != null) {
-            const record = await Record.create({description, notes, start, end, enjoyment, productivity, userId: user.id })
+            const record = await Record.create({ description, notes, start, end, enjoyment, productivity, userId: user.id, categoryId: category.id });
             return res.status(201).send(record)
         } else {
             return res.status(400).send("No user in the database with id:" + userId);
@@ -26,7 +29,7 @@ const readAll = async function (req, res) {
     try {
         const records = await Record.findAll();
         if (records != null) {
-            return res.status(200)
+            return res.status(200).send(records);
         } else {
             return res.status(404).send("No Records in the database");
         }

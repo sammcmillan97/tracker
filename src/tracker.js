@@ -10,7 +10,7 @@ const app = exressSetUp();
 
 async function main() {
   try {
-      await sequelize.sync()
+      await sequelize.sync({ force: true })
       await sequelize.authenticate();
       console.log('Database synced')
       app.listen(PORT, HOST);
