@@ -25,10 +25,17 @@ function checkIfValidUUID(id) {
     return regexExp.test(string)
  }
 
+ function checkEndDateAfterStartDate(start, end) {
+   const startDate = new Date(start);
+   const endDate = new Date(end);
+   return (startDate < endDate)
+ }
+
 
   module.exports = {
     checkIfValidUUID,
     checkIfValidEmail,
     checkStringLength,
-    checkIfValidWord
+    checkIfValidWord,
+    checkEndDateAfterStartDate
   };

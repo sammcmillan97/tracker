@@ -5,7 +5,7 @@ const createCategory = async function(req, res){
     try {
         //Validation
         if(!req.body.hasOwnProperty("name")) {
-            return res.status(400).send("Missing body parameters");
+            return res.status(400).send("Request body missing required parameters");
         }
         const categoryBody = req.body;
         if(!validator.checkIfValidWord(categoryBody.name) || !validator.checkStringLength(categoryBody.name, 1, 30)) {
@@ -18,7 +18,6 @@ const createCategory = async function(req, res){
         }
         return res.status(201).json(category);
     } catch(err) {
-        console.log(err)
         return res.status(500).send("Internal Server Error");
     }
 }
@@ -86,17 +85,19 @@ const updateCategory = async function(req, res) {
         if(!validator.checkIfValidWord(categoryBody.name) || !validator.checkStringLength(categoryBody.name, 1, 30)) {
             return res.status(400).send("Invalid name format: Name must have a length between 1 and 30 characters and contain no speical characters")
         }
-
-        const category = categoryAccess.update(id, categoryBody);
-        if (category == null) {
+        const category = await categoryAccess.update(id, categoryBody);
+        if (category == "Not Found") {
             return res.status(404).send("Category not found");
+        }
+        if (category == null) {
+            return res.status(400).send("Category name must be unique");
         }
         if (category.name == "SequelizeUniqueConstraintError" || category.name == "SequelizeValidationError") {
             return res.status(400).send(user.errors[0].message);
         }
-        return res.status(200).send("Category: " + categoryBody.name + " updated to :" + category.);
+        return res.status(200).send("Category: " + categoryBody.name + " updated");
     } catch (err) {
-        return res.status(500).send("Internal Server Error");
+        return res.status(500).send(err);
     }
 }   
 

@@ -5,8 +5,8 @@ const recordController = require('../controllers/records.controller');
 
 
 router.route('/')
-    .post(recordController.create)
-    .get(recordController.readAll);
+    .post(recordController.createRecord)
+    .get(recordController.readAllRecords);
     
 module.exports = router;    
 

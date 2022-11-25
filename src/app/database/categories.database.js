@@ -11,7 +11,7 @@ const create = async function (categoryBody) {
 
 const getOne = async function(id) {
     try {
-        const category = Category.findOne({ where: { id }});
+        const category = await Category.findOne({ where: { id }});
         return category;
     } catch(err) {
         return err;
@@ -20,7 +20,7 @@ const getOne = async function(id) {
 
 const getAll = async function() {
     try {
-        const categories = Category.findAll();
+        const categories = await Category.findAll();
         return categories;
     } catch(err) {
         return err;
@@ -44,9 +44,12 @@ const update = async function(id, categoryBody) {
     try {
         const category = await Category.findOne({ where: { id }})
         if (category == null) {
-            return category
+            return "Not Found"
         }
-        category.update(categoryBody);
+        if(categoryBody.hasOwnProperty("name")) {
+            category.name = categoryBody.name;
+        }
+        await category.save();
         return category;
     } catch(err) {
         return err;

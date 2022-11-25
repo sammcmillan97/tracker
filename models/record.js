@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     notes: { type: DataTypes.TEXT, allowNull: false },
     start: { type: DataTypes.DATE, allowNull: false },
     end: { type: DataTypes.DATE, allowNull: false },
-    enjoyment: { type: DataTypes.INTEGER, allowNull: false },
-    productivity: { type: DataTypes.INTEGER, allowNull: false },
+    enjoyment: { type: DataTypes.INTEGER, allowNull: false, validate : {min: 1, max: 10}},
+    productivity: { type: DataTypes.INTEGER, allowNull: false, validate : {min: 1, max: 10}},
   }, {
     sequelize,
     tableName: 'records',
