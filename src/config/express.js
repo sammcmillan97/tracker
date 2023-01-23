@@ -8,5 +8,4 @@ module.exports = function exressSetUp ()  {
     const routes = require('../app/routes/index.route');
     app.use(routes);
     return app;
-
 };

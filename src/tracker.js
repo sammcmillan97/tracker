@@ -1,8 +1,8 @@
 'use strict';
 
 const exressSetUp = require('./config/express');
-const connect = require('./config/db');
-
+const { sequelize } = require('../models')
+const logger = require('./config/logger')
 
 const PORT = 3000;
 const HOST = '0.0.0.0';
@@ -11,11 +11,13 @@ const app = exressSetUp();
 
 async function main() {
   try {
-      connect();
+      await sequelize.sync({ force: true })
+      await sequelize.authenticate();
+      console.log('Database synced')
       app.listen(PORT, HOST);
-      console.log(`Running on http://${HOST}:${PORT}`);
+      logger.info(`Running on http://${HOST}:${PORT}`);
   } catch (err) {
-      console.log('Unable to connect to Postgres');
+      console.log('Unable to connect to Postgres', err);
   }
 }
 
