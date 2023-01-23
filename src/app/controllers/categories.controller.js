@@ -58,14 +58,14 @@ const removeCategory = async function(req, res){
         const id = req.params.id;
         //Validation
         if(!validator.checkIfValidUUID(id)) {
-            return res.status(400).send("Invalid user ID format");
+            return res.status(400).send("Invalid category ID format");
         }
 
         const category = await categoryAccess.remove(id);
         if (category == null) {
             return res.status(404).send("Category not found");
         }
-        return res.status(200).send("Category:" + category.name + " deleted");
+        return res.status(200).send("Category: " + category.name + " deleted");
     } catch (err) {
         return res.status(500).send("Internal Server Error");
     }

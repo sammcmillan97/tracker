@@ -6,7 +6,7 @@
     "main": "src/tracker.js",
     "scripts": {
         "start": "node src/tracker.js",
-        "test": "mocha"
+        "test": "mocha ./test/ --recursive"
     },
     "dependencies": {
         "bcrypt": "^5.1.0",
@@ -15,11 +15,13 @@
         "mocha": "^10.1.0",
         "pg": "^8.8.0",
         "pg-hstore": "^2.3.4",
+        "pino": "^8.8.0",
         "sequelize": "^6.25.6",
         "sequelize-cli": "^6.5.2"
     },
     "devDependencies": {
         "should": "^13.2.3",
-        "should-http": "^0.1.1"
+        "should-http": "^0.1.1",
+        "supertest": "^6.3.1"
     }
 }

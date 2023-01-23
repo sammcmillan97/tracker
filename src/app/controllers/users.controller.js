@@ -11,7 +11,7 @@ const getUser = async function(req, res){
         const user = await userAccess.read(id);
         if(user == null) {
             return res.status(404).send("User not found");
-        }  
+        }
         return res.status(200).json(user); 
 
     } catch {
@@ -28,7 +28,7 @@ const registerUser = async function(req, res){
         || !req.body.hasOwnProperty("firstName") 
         || !req.body.hasOwnProperty("lastName") 
         || !req.body.hasOwnProperty("password")) {
-            return res.status(400).send("Missing body parameters");
+            return res.status(400).send("Request body missing required parameters");
         }
         const userData = req.body;
         if(!validator.checkIfValidEmail(userData.email)) {

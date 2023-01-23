@@ -2,8 +2,7 @@ FROM node:12
 
 WORKDIR /app
 
-COPY ./package.json .
-RUN npm cache clean --force
+COPY ./package.json .c
 RUN npm install
 COPY . .
 

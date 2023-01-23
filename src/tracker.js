@@ -2,6 +2,7 @@
 
 const exressSetUp = require('./config/express');
 const { sequelize } = require('../models')
+// const logger = require('./config/logger')
 
 const PORT = 3000;
 const HOST = '0.0.0.0';
@@ -14,11 +15,10 @@ async function main() {
       await sequelize.authenticate();
       console.log('Database synced')
       app.listen(PORT, HOST);
-      console.log(`Running on http://${HOST}:${PORT}`);
+      // logger.info(`Running on http://${HOST}:${PORT}`);
   } catch (err) {
       console.log('Unable to connect to Postgres', err);
   }
 }
-
 
 main();

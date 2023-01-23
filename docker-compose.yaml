@@ -20,7 +20,7 @@ services:
   postgres:
     image: postgres:11
     ports:
-      - "35432:5432"
+      - "5432:5432"
     volumes:
       - ./docker/init-db:/docker-entrypoint-initdb.d/
     environment:
