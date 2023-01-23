@@ -1,11 +1,8 @@
-const pino = require('pino');
+const logger = require('pino')();
 
-let logger = pino();
+// const options = {
+//   level: 'info',
+//   translateTime: true
+// };
 
-const options = {
-  level: 'info',
-  translateTime: true
-};
-logger = pino(options);
-
-module.exports = logger; 
+module.exports = logger;
